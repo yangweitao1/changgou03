@@ -1,0 +1,32 @@
++ Thymeleaf入门
+
++ 基本语法 ----
+
++ 商品的搜索的结果页渲染(thymeleaf)-----
+
++ 商品详情页的[静态化]
+
+
+
++ theymleaf 
+	就是开源的 的模板引擎,可以用来替代JSP视图技术.(还可以通过theynmleaf生成静态页面,生成JAVA代码,xml代码).
+
+	主要是用于视图(jsp)展示.
+
++ 使用thymeleaf	    (特么礼服)
+	+ springboot工程
+	+ 加入依赖
+	+ 编写一个模板(.html)
+		+ 引入约束声明
+		+ 使用thymeleaf的标签(类似于jsp的EL表达式) 
+	+ 编写controller (接收请求,给用户渲染页面展示Hello world)
+		获取数据,数据设置到model
+
++ RequestBody
+	+ 接收post put 请求体中的内容.
+
++ RequestParam
+	+ 接收get请求 请求url后的?a=1&b=2  
+	+ @requestParam() Map
+
+

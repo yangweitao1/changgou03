@@ -1,0 +1,40 @@
++ oauth2.0(认证)
+    + 单点登录
+    + 第三方登录
++ 单点登录
+    + oauth2.0 (微服务中)
++ 第三方认证
+
++ 畅购的认证(JWT + 公钥+ 私钥(验签))
+
+
++单点登录 (SSO)
+	用户只需要登录一次,就可以访问相互信任的系统.这个解决方案就是单点登录.
+
+
+ + oatuh2.0的认证流程的角色
+	+ 客户端       (heima)
+	+ 资源拥有者   (用户)
+	+ 资源服务器	(用户信息所在的服务器)
+	+ 认证系统	(认证系统qq)
+	
+ + oauth2.0 的认证模式
+	+ 授权码模式（Authorization Code）   ***** 最安全
+	+ 隐式授权模式（Implicit） 
+	+ 密码模式（Resource Owner Password Credentials） *****	(流程简单,不安全)
+	+ 客户端模式（Client Credentials） 
+
+	https://projects.spring.io/spring-security-oauth/docs/oauth2.html
+
++ 用户资源服务器
+	+ 加入依赖
+	+ classpath下存储public.key
+	+ 配置类
+		+ 校验令牌配置
+		+ 保护资源配置
+
+
+
+
+
+

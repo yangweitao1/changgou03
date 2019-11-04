@@ -1,0 +1,51 @@
++ 异常处理
+	springmvc的统一的异常处理
+	+ 定义一个异常处理类
+	+ 交给sprign容器管理
+	+ 统一处理异常类中编写方法(获取异常做处理)
+
+
++ day02
+	+ 图片上传(功能)
+	+ 如何实现图片上传
+	+ fastdfs的架构
+	+ 上传流程
+	+ 下载流程()
+	+ 在微服务中实现畅购的图片上传的功能解决方案 ()
+	+ 实现上传的功能(文件的上传,下载,删除,访问图片)
+	+ 作业()
+
+
++ 文件上传
+	springmvc的文件上传
+	+ jsp 设置一个表单 并设置encod/type=multi-part/formdata --->文件上传
+
+
+
+
+
+
+	+ 创建一个controller 接收文件
+		+ 获取字节 存储
+		+ 调用fastdfs的api 上传到fastdfs
+		+ 返回给前端一个上传成功之后的图片的地址(URL)
+
+	+ 配置一个多媒体解析器
+	+ 一定要有file-common.jar在classpath就可以了
+
++ 跨域
+	+ 多个分布式系统之间进行数据(ajax请求)调用存在的问题.  ajax调用不允许跨域调用
+
+	+ localhost:8080 --->localhost:8081 --->也是跨域
+
+	+ www.jd.com --->www.taobao.com -->跨域
+
+	+ www.jd.com:8080-->www.jd.com:8081--->跨域
+
+	+http://www.jd.com -->https://www.jd.com -->跨域
+
+
+	+ 只有一种不跨域
+		+ 相同的协议  相同的域名  相同的端口 就不是跨域.
+
+

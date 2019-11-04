@@ -1,0 +1,91 @@
++ 实现商品的关键字搜索     (3天,) 
+
++ elasitcsearch 安装
+
++ 安装中文分词器
+
++ head 插件的安装
+
++ kibana的(restfull请求实现相关的CURD功能)
+
++ 数据库的数据导入到ES的服务器中 (索引)
+
++ 关键字的搜索
+
++ 商品分类的搜索的展示
+
+
+
++ 全文检索技术 (lucene)
++ elasticsearch (基于lucene的全文检索技术(服务器))
+	+ 支持量大
+	+ 扩展容器
+	+ 开发的API 简单 (restful api)
+
+
++ 安装es
+	
++ 安装head
+	+ 先拉取镜像
+		docker pull mobz/elasticsearch-head:5
+	+ 执行命令 创建head插件的容器
+		docker run -di --name elasticsearch-head -p 9100:9100 mobz/elasticsearch-head:5
+	+ 重新启动
+		docker restart 	   elasticsearch-head
++ 安装ik 中文分词器
+	
+
++ 索引(index)-->类型(type)-->文档(document)-->字段(field)    映射(mapping)  是否分词,是否索引,是否存储,分词器是什么,数据类型是什么?
+
++ 数据库库 --->表----------->表的行---------->列             列的属性限制
+
+
+
++ 安装kibana
+	docker run -it -d -e ELASTICSEARCH_URL=http://192.168.211.132:9200 --name kibana --restart=always -p 5601:5601 kibana:5.6.8
+
+
+
+
+
+ + FieldType.Keyword
+	数据类型   Keyword 表示关键字 字符串.是不分词的.
+
+ + FieldType.Text  
+	数据类型   表示文本    字符串 可以分词的.
+
+
+
+ + 导入数据到ES中
+	+ 请求  由后台开发人员发送请求 实现数据导入了
+
+	+ 请求 /search/import
+	+ 参数:没有
+	+ 返回值: result
+	搜索微服务中:
+	controller servcie dao(elasticsearchRepository)
+	
+ + 关键字搜索
+	+ 页面发送请求
+	+ 请求参数将其封装到一个MAP 传递过来
+	+ 后台接收请求,解析里面所有的条件 执行查询的方法
+	+ 获取到结果 再封装到MAP中返回给页面
+
+	controller service  dao
+	
+
+ + 分类的列表展示
+	+ 采用es的分组查询 类似于mysql  select category_name from tb_sku where name like '%华为%' group by category_name
+
+	+ 搜索的时候,设置分组的条件
+
+	+ 搜索的结果中,获取分组的结果集合
+
+	+ 获取商品分类的所有的数据返回也么
+
+
+
+
+
+	
+

@@ -1,0 +1,61 @@
+  + 什么时候网关
+
+  + 网关的作用
+	+ 断言     predicate
+	+ 过滤器   filter
+	+ 路由	   route
+	+ 限流
+
+  + 搭建网关系统
+
+  + JWT(技术来实现权限校验)
+
+  + 通过网关来实现权限校验的功能()
+
+
+
+ + 网关:就是微服务(系统)
+	目的:就是[路由]请求到不同的微服务.
+
+ + 需求:
+	只要在浏览器中输入cloud.itheima.com的请求 都需要路由到商品微服务中
+
+ + redis实现令牌桶的算法 实现 网关的限流
+	+ 加入依赖
+	+ 需要配置过滤器器
+		+指定 速率
+		+指定 参数 
+		+指定KeyResolver 定义用户的唯一的key
+
+
++ 用户的登录
+	+ 用户在前端页面输入
+		+ 用户名
+		+ 密码
+
+	+ 微服务接收请求
+		+ 根据用户名获取用户的数据
+		+ 匹配是否密码一致,一致返回登录成功,不一致就登录错误.
+
+
++ JWT 就是一个字符串.由3部分来组成
+	+ header (头) base64编码	  eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+	+ playload(载荷) base64编码                 eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9
+	+ 签名（signature）    TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ
+		+header --->base64
+		+payload--->base64
+		+ secret
+		+ 头+载荷+secret 经过hs256算法加密得出一个字符串:TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ
+
+
+
+	 eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ
+
+
++ 权限校验
+	+ 用户登录,需要用户微服务 校验用户的正确与否,正确,颁发令牌给用户
+	+ 用户再次访问网关
+	+ 网关编写一个全局的过滤器
+		+过滤器内部 获取令牌信息
+		+解析令牌
+		+解析成功 放行,失败,直接返回.

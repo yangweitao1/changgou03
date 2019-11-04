@@ -1,0 +1,70 @@
++ 电商的行业
+
++ 电商的模式 ()
+
++ 畅购的需求的设计 (前台 后台)
+
++ 系统设计
+	+ 架构的设计
+	+ 微服务技术
+	+ 整个changgou的技术解决方案
+
++ 搭建项目(结构)
+
++ 搭建(商品)微服务(实现后台的功能:品牌CURD)
+
++ 通用的Mapper
+
+
+
++ 分布式
+	+ 一件事件 拆来做做
+
++ 集群
+	+ 同一件事 大家一起做
+
+
++ 电商的模式
+	+ B2C(changgou 以前的jd  ) 
+	+ b2b(阿里巴巴)
+	+ b2b2c(现在的jd)
+	+ c2c (淘宝)
+
+
++ 	安装swaggerui文档
+	+ 设置环境变量 HS_HOME: F:\courses\changgou\资料\swagger\swagger-ui-master
+	+ 加入path路径: %HS_HOME%\node_modules\.bin
+	+ cmd 到目录 执行命令
+		hs -p 500
+
+	+ http://127.0.0.1:500/dist/index.html
+	
+
++ 搭建微服务
+	+ 依赖
+	+ yml
+	+ 引导类
+	+ controller service dao
+
++ 品牌的CRUD
+	+ 思路:
+		+ 根据原型图,分析出要的需求,根据需求,写出swagger接口文档
+		+ 根据文档编写后台的代码
+			+ controller 
+			+ service
+			+ dao   可以使用通用的MAPPER
+
+
+ + 如何集成通用的MAPPER
+	+ 依赖
+	+ 组件扫描(mapper接口所在的包) 
+	
+
+
+ + 如何使用通用的MAPPER
+
+	+ 编写一个接口BrandDao extends Mapper<Brand>  可以了(CRUD)
+	+ 要求 
+		POJO 一定要做JPA的注解实现表和POJO的映射关系
+
+

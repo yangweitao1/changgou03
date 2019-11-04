@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: rabbitmqdelay
+  rabbitmq:
+    host: 192.168.211.132
+server:
+  port: 8081

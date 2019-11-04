@@ -1,0 +1,39 @@
++ 广告的表的设计
+
++ 如何实现
+	+ 分析实现的解决方案
+	+ 采用nginx+ lua+redis+canal来实现.
+
++ 高并发的问题	  采用nginx+ lua+redis+canal来实现.
+
++ nginx的限流
+
++ canal (监听数据的变化)
+
++ 完成 监听数据变化,数据的同步.
+
+
+
+
++ 使用lua 实现广告数据从mysql 存储到redis中的测试 
+	+ 定义请求
+	+ nginx接收请求
+	+ 交给lua脚本来执行
+	+ lua脚本需要自己编写:
+		目的就是将广告数据存储到redis中
+
+	+ 配置nginx
+		content_by_lua_file /root/lua/aaa.lua
+
+
+
++ 使用lua 实现广告的数据展示(读取)(功能的实现)
+	+ 定义一个请求 read_content
+	+ nginx接收请求
+	+ 交给lua处理
+		读取广告的数据:
+		1.先从nginx获取数据
+		2.从redis中获取-->写入nginx的缓存
+		3.从mysql中获取数据-->写入到redis
+	+ 配置nginx
+		content_by_lua_file /root/lua/bbb.lua

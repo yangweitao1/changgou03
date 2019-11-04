@@ -1,0 +1,114 @@
+1 秒杀业务分析
+2 秒杀的思路(重点)
+3 Spring定时任务
+4 redis 队列
+5 秒杀频道的数据列表展示
+6. 详情页展示.
+7. 实现下单()
+
+
+
++ 秒杀特点
+	
+	+ 并发量特别高 ()
+	+ 设计的时候,数据库 有,但是需要独立出来.
+	+ 系统独立出来.
+
++ 秒杀思路   (限流,减少瞬间访问数据库的压力)
+	+ DNS负载均衡.
+	+ nginx 限流
+	+ 验证码
+	+ 网关限流
+	+ 消息队列(限流)
+	+ redis (no sql) 来减少数据库的访问压力. ......	    操作具有原子性 ()
+
++ spring task
+	+ 指定一个类 类创建一个方法,方法上修饰一个注解@schecaled(cron="")  方法就是指定何时执行该方法
+	
+	+ 开启注解支持
+
+
++ 将24小时 变成12个时段,根据时段获取该时段对应的所有的商品的数据 ,通过工具类获取当前时间段所属的5个时段.
+
+
++ 首页上展示 每一个时段对应的商品的列表数据
+	
+       存储数据到reids中  key  value? 用hash类型
+
+			  key                  field           value
+
+
+			  key(2019100916)      商品id:1        商品的POJO1 
+
+			  key(2019100916)      商品id:2        商品的POJO2 
+			  
+			  key(2019100916)      商品id:3        商品的POJO4 
+
+
+
+			  key(2019100918)      商品id:4        商品的POJO4
+
+			  key(2019100918)      商品id:5        商品的POJO5 
+			  
+			  key(2019100918)      商品id:6        商品的POJO6 
+
+
++ 符合条件的秒杀商品数据
+	  select * from tb_seckill_goods where 
+	 `status`='1' 
+	  and stock_count>0
+	  and start_time>=开始时间段 
+	  and end_time < 开始时间段+2hour
+
+
+
+
++ redis的序列化机制
+
+	+ 默认的情况下,reids 进行操作的时候key field value 都是使用jdk自带的序列化机制来进行二进制的序列化.
+
+	+ redis存储的数据都是二进制的数据.
+
+
+	+ 如果使用的时候保存一个key 或者value 如果该key value 没有实现序列化接口就会报错.
+		JdkSerializationRedisSerializer
+
+	+ 可以通过以下的代码实现自定义序列化机制.
+
+   @Bean
+    public RedisTemplate<Object, Object> redisTemplate(
+            RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate<Object, Object> template = new RedisTemplate<>();
+        //自定义序列化机制 指定key的序列化方式为String
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setConnectionFactory(redisConnectionFactory);
+        return template;
+    }
+
+
++ 获取某一个商品的详情数据
++ 发送请求 传递 当前所属的时段字符串 和 点击到的商品的ID 作为参数
+
++ 后台从redis中获取秒杀商品数据返回
+
++ 多线程
+	+ 秒杀 线程池.
+	+ 批量处理(1000W)   [0-100][101-200][]
+
+	+ spring集成多线程实现
+		+ 创建一个类(交给spring容器管理)
+		+ 写方法(被多线程异步调用)
+		+ 方法上修饰一个注解@Async
+		+ 开启支持异步注解 (默认使用线程池)
+
+
+
+
+
+
+
+
+
+
+
+
